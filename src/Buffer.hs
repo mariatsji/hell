@@ -17,7 +17,7 @@ fromList keyvals = compact $ Buffer (MM.fromList (filter nonempty keyvals))
 
 compact :: Buffer -> Buffer
 {-# INLINE compact #-}
-compact (Buffer mm) = Buffer $ MM.fromMap $ Set.toList <$> MM.toMapOfSets mm
+compact = Buffer . MM.fromMap . fmap Set.toList . MM.toMapOfSets . unBuffer
 
 get :: Text -> Buffer -> [Text]
 get k = MM.lookup k . unBuffer
