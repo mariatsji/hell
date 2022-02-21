@@ -20,7 +20,7 @@ compact :: Buffer -> Buffer
 compact (Buffer mm) = Buffer $ MM.fromMap $ Set.toList <$> MM.toMapOfSets mm
 
 get :: Text -> Buffer -> [Text]
-get k (Buffer mm) = MM.lookup k mm
+get k = MM.lookup k . unBuffer
 
 dump :: Buffer -> [(Text, Text)]
-dump (Buffer mm) = MM.toList mm
+dump = MM.toList . unBuffer
